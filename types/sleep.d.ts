@@ -1,1 +1,0 @@
-declare function sleep(time: Number): Promise<void>;
