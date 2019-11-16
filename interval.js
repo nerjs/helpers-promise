@@ -1,15 +1,21 @@
-const asyncInterval = (callback, _errorCallback, _time = 0) => {
+/**
+ * @param {Function} callback
+ * @param {Function} [errorCallback]
+ * @param {Number} [time]
+ * @returns {Function} stop interval
+ */
+const asyncInterval = (callback, errorCallback, time = 0) => {
     if (!callback || typeof callback !== 'function')
         throw new TypeError('Callback should be a function')
 
-    let errorCallback = error => console.error(error)
-    let time = 0
+    let errorHandler = error => console.error(error)
+    let timeTimeout = 0
 
-    if (typeof _errorCallback === 'function') {
-        errorCallback = _errorCallback
-        time = isNaN(Number(_time)) ? time : Number(_time)
-    } else if (typeof _errorCallback === 'number') {
-        time = _errorCallback
+    if (typeof errorCallback === 'function') {
+        errorHandler = errorCallback
+        timeTimeout = isNaN(Number(time)) ? timeTimeout : Number(time)
+    } else if (typeof errorCallback === 'number') {
+        timeTimeout = isNaN(Number(errorCallback)) ? timeTimeout : Number(errorCallback)
     }
 
     let tid
@@ -18,13 +24,13 @@ const asyncInterval = (callback, _errorCallback, _time = 0) => {
         try {
             await callback()
         } catch (err) {
-            errorCallback(err)
+            errorHandler(err)
         }
 
-        tid = setTimeout(interval, time)
+        tid = setTimeout(interval, timeTimeout)
     }
 
-    tid = setTimeout(interval, time)
+    tid = setTimeout(interval, timeTimeout)
 
     return () => clearTimeout(tid)
 }
