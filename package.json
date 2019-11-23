@@ -1,6 +1,6 @@
 {
   "name": "helpers-promise",
-  "version": "1.2.3",
+  "version": "1.2.31",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./",
@@ -9,6 +9,13 @@
   "repository": "git@github.com:nerjs/helpers-promise.git",
   "author": "nerjs <nerjs.stap@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "helpers",
+    "Promise",
+    "async",
+    "interval",
+    "timeout"
+  ],
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
