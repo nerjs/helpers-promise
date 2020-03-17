@@ -80,3 +80,8 @@ asyncInterval(async () => {
     console.log(err.message) // console: Test error
 }, 1000)
 ```
+
+
+---
+
+#### [:link: All utils ](https://github.com/nerjs/utils#readme)
