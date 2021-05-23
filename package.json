@@ -1,6 +1,6 @@
 {
   "name": "helpers-promise",
-  "version": "1.2.32",
+  "version": "1.2.33",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./",

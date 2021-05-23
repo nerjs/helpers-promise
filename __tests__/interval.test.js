@@ -74,4 +74,14 @@ describe('Interval', () => {
 
     expect(callback).not.toHaveBeenCalled()
   })
+
+  it('time difference', () => {
+    const callback = () => sleep(500)
+
+    asyncInterval(callback, 1000, true)
+    setTimeout.mockClear()
+    jest.runOnlyPendingTimers()
+    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimeout.mock.calls[0][1]).toEqual(500)
+  })
 })
