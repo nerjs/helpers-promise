@@ -45,7 +45,6 @@ const asyncInterval = (callback, errorCallback, time = 0, timeDifference) => {
     tid = setTimeout(interval, timeDiff())
   }
 
-  console.log('test')
   tid = setTimeout(interval, timeTimeout)
 
   return () => clearTimeout(tid)

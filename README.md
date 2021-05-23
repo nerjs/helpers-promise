@@ -64,7 +64,7 @@ const asyncInterval = require('helpers-promise/interval');
 const { asyncInterval } = require('helpers-promise');
 
 // use
-asyncInterval(callback, [errorCallback], [time])
+asyncInterval(callback, errorCallback?, time?, timeDifference?)
 ```
 
 ```js
@@ -79,6 +79,29 @@ asyncInterval(async () => {
 }, err => {
     console.log(err.message) // console: Test error
 }, 1000)
+
+// timeDifference
+asyncInterval(async () => {
+    console.log('start')
+    await sleep(500)
+    console.log('end')
+}, 1000, true) // start -> end ~500ms, end -> start ~500ms
+```
+
+### waitEmitter
+
+```js
+const waitEmitter = require('helpers-promise/waitEmitter');
+// or:
+const { waitEmitter } = require('helpers-promise');
+
+// use
+waitEmitter(
+    emitter: Object, // instance Events
+    resolveTrigger: String|String[],
+    rejectTrigger?: String|String[],
+    timeout?: Number 
+)
 ```
 
 
