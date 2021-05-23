@@ -3,15 +3,15 @@ const sleep = require('../sleep')
 jest.useFakeTimers()
 
 describe('Sleep', () => {
-    test('test delay', () => {
-        const promise = sleep(10)
+  test('test delay', () => {
+    const promise = sleep(10)
 
-        expect(promise).toBeInstanceOf(Promise)
-        expect(setTimeout).toHaveBeenCalledTimes(1)
-        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 10)
+    expect(promise).toBeInstanceOf(Promise)
+    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 10)
 
-        jest.runOnlyPendingTimers()
+    jest.runOnlyPendingTimers()
 
-        expect(promise).resolves.toBeUndefined()
-    })
+    expect(promise).resolves.toBeUndefined()
+  })
 })

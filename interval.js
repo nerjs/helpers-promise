@@ -5,34 +5,33 @@
  * @returns {Function} stop interval
  */
 const asyncInterval = (callback, errorCallback, time = 0) => {
-    if (!callback || typeof callback !== 'function')
-        throw new TypeError('Callback should be a function')
+  if (!callback || typeof callback !== 'function') throw new TypeError('Callback should be a function')
 
-    let errorHandler = error => console.error(error)
-    let timeTimeout = 0
+  let errorHandler = error => console.error(error)
+  let timeTimeout = 0
 
-    if (typeof errorCallback === 'function') {
-        errorHandler = errorCallback
-        timeTimeout = isNaN(Number(time)) ? timeTimeout : Number(time)
-    } else if (typeof errorCallback === 'number') {
-        timeTimeout = isNaN(Number(errorCallback)) ? timeTimeout : Number(errorCallback)
-    }
+  if (typeof errorCallback === 'function') {
+    errorHandler = errorCallback
+    timeTimeout = isNaN(Number(time)) ? timeTimeout : Number(time)
+  } else if (typeof errorCallback === 'number') {
+    timeTimeout = isNaN(Number(errorCallback)) ? timeTimeout : Number(errorCallback)
+  }
 
-    let tid
+  let tid
 
-    const interval = async () => {
-        try {
-            await callback()
-        } catch (err) {
-            errorHandler(err)
-        }
-
-        tid = setTimeout(interval, timeTimeout)
+  const interval = async () => {
+    try {
+      await callback()
+    } catch (err) {
+      errorHandler(err)
     }
 
     tid = setTimeout(interval, timeTimeout)
+  }
 
-    return () => clearTimeout(tid)
+  tid = setTimeout(interval, timeTimeout)
+
+  return () => clearTimeout(tid)
 }
 
 module.exports = asyncInterval
